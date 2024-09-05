@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: placeholder
-        uses: echo "test"
+        run: echo "test"
   test:
     name: Test
     needs: [ scan ]
