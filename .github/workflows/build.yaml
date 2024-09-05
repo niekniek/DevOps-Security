@@ -28,6 +28,12 @@ jobs:
           push: true
           tags: |
             nietniek/student-app:latest
+  scan:
+    name: scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: placeholder
+        uses: echo "test"
   test:
     name: Test
     needs: [ scan ]
