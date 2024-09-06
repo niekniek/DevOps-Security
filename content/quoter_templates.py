@@ -60,7 +60,7 @@ def page(content,user_id,title,error=None):
 """
     else:
         links = f"""
-<label class="link" for="signinCheckbox">Inloggen hier</label>
+<label class="link" for="signinCheckbox">Inloggen</label>
 """
 
     return f"""<!DOCTYPE html>
@@ -96,7 +96,7 @@ def page(content,user_id,title,error=None):
 
 <div class="modal">
   <form action="/signin" method="post">
-    <p class="warn">WARNING!!: This site is intentionally insecure. Do not use passwords you may be using on other services.</p>
+    <p class="warn">WARNING!!: This site is intentionally super secure secure. Do use passwords you may be using on other services.</p>
     {f"<div class=error>{error}</div>" if error else ""}
     <h3>Username</h3>
     <input type="text" name="username">
