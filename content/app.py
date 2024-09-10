@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, make_response
+from flask import Flask, request, redirect, make_response, escape
 import sqlite3
 import urllib
 import quoter_templates as templates
@@ -33,7 +33,7 @@ def check_authentication():
 @app.route("/")
 def index():
     quotes = db.execute("select id, text, attribution from quotes order by id").fetchall()
-    return templates.main_page(quotes, request.user_id, request.args.get('error'))
+    return templates.main_page(quotes, request.user_id, escape(request.args.get('error', '')))
 
 
 # The quote comments page
@@ -56,7 +56,7 @@ def post_quote():
 @app.route("/quotes/<int:quote_id>/comments", methods=["POST"])
 def post_comment(quote_id):
     with db:
-        db.execute(f"""insert into comments(text,quote_id,user_id) values("{request.form['text']}",{quote_id},{request.user_id})""")
+        db.execute("INSERT INTO quotes (text, attribution) VALUES (?, ?)", (request.form['text'], request.form['attribution']))
     return redirect(f"/quotes/{quote_id}#bottom")
 
 
@@ -66,7 +66,8 @@ def signin():
     username = request.form["username"].lower()
     password = request.form["password"]
 
-    user = db.execute(f"select id, password from users where name='{username}'").fetchone()
+    user = db.execute("SELECT id, password FROM users WHERE name = ?", (username,)).fetchone()
+
     if user: # user exists
         if password != user['password']:
             # wrong! redirect to main page with an error message
