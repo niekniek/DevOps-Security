@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "3c0a4c9a-52a2-4cef-bbcc-b319a6291c99",
+		"name": "DevSecOpsTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36762101",
+		"_collection_link": "https://devsecopsteam.postman.co/workspace/DevSecOpsTeam~fdb015af-9cb1-402b-8ff7-ed51f9829ccc/collection/36762101-3c0a4c9a-52a2-4cef-bbcc-b319a6291c99?action=share&source=collection_link&creator=36762101"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {\r",
+					"  pm.response.to.have.status(200);\r",
+					"});\r",
+					""
+				]
+			}
+		}
+	]
+}
