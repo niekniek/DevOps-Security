@@ -84,9 +84,7 @@ jobs:
               sudo kubectl apply -f ${{ github.workspace }}/kubernetes/nginx-service.yaml --force
 
   automated-api-tests:
-    name: API Test with Postman
     runs-on: ubuntu-latest
-    needs: [ deploy ]
     steps:
       - uses: actions/checkout@v4
       - name: Install Postman CLI
@@ -96,4 +94,4 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "/home/runner/work/DevOps-Security/postman/collections/Testing.json"
+          postman collection run "${{ github.workspace }}/postman/collections/Testing.json"
